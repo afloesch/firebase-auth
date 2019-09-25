@@ -1,0 +1,7 @@
+{
+  "extends": "react-app",
+  "rules": {
+    "no-restricted-globals": [],
+    "no-dupe-keys": 0
+  }
+}
