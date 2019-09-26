@@ -42,6 +42,15 @@ class Login extends React.Component {
     Firebase.addListener(this.handleAuthStateChange);
   }
 
+  componentDidMount() {
+    let user = Firebase.getUser();
+    this.setState({user: user, loader: false});
+  }
+
+  componentWillUnmount() {
+    Firebase.clearListener();
+  }
+
   handleFieldChange(event) {
     let newState = {};
     newState[event.target.id] = event.target.value
@@ -146,9 +155,7 @@ class Login extends React.Component {
 
   render() {
 
-    let user = Firebase.getUser()
-
-    if (this.state.loader && !user) return this.loader();
+    if (this.state.loader) return this.loader();
 
     if (!this.state.user) {
       return this.login();

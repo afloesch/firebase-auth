@@ -26,6 +26,10 @@ class Firebase {
     this.listeners.push(func);
   }
 
+  clearListener = function() {
+    this.listeners = [];
+  }
+
   getUser = function() {
     return this.auth.currentUser;
   }
