@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Reset from '../components/ResetPassword';
@@ -9,23 +9,16 @@ function ResetPassword(props) {
 
   console.log(props);
 
-  /*if (Object.keys(resetParams).length > 0) {
+  if (props.fbData) {
     content = (<div>test successful!</div>)
-  } else {
-    content = (<Reset className={props.jss.classes.reset} classes={props.jss.rules.raw} />)
-  }*/
+  }
 
-  return (
-    <div className={props.jss.classes.app}>
-      <div className={props.jss.classes.container}>
-        {content}
-      </div>
-    </div>
-  );
+  return content;
 }
 
 ResetPassword.propTypes = {
-  jss: PropTypes.object.isRequired
+  jss: PropTypes.object.isRequired,
+  fbData: PropTypes.object
 }
 
 export default ResetPassword

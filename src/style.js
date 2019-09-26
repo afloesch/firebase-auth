@@ -2,7 +2,7 @@ const theme = {
   color: {
     white: "white",
     black: "black", 
-    grey: "#e0e0e0",
+    grey: "#eaeaea",
     green: "green"
   }
 };
@@ -12,12 +12,19 @@ const style = {
     "html, body, #root": {
       height: '100%',
       position: 'relative',
-      background: theme.color.white,
+      background: theme.color.grey,
       color: theme.color.black
     },
     '#form': {
       overflow: 'hidden'
     },
+    body: {
+      margin: 0,
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif'
+    },
+    code: {
+      fontFamily: 'source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace'
+    }
   },
   app: {
     position: "absolute",
@@ -39,7 +46,6 @@ const style = {
     margin: "1em 0",
     float: "right",
     fontWeight: "bold",
-    background: "#45484d",
     background: "linear-gradient(to bottom,  #45484d 0%,#000000 100%)",
     color: theme.color.white,
     '&:hover': {
@@ -72,6 +78,9 @@ const style = {
   },
   link: {
     fontSize: '13px'
+  },
+  paper: {
+    padding: '3em 2em'
   }
 }
 

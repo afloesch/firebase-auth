@@ -2,40 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
 
-import { Redirect } from 'react-router'
+import ResetPassword from './ResetPassword';
+import {Redirect} from 'react-router-dom';
 
 function Auth(props) {
 
-  const parsed = queryString.parse(props.location.search);
-  console.log(parsed);
+  console.log(props)
 
-  if (!parsed.mode) {
-    return (
-      /* Need an error page */
-      <div>
-        Error: unsupported method
-      </div>
-    )
-  }
+  const parsed = queryString.parse(props.location.location.search);
+  console.log(parsed);
   
-  if (parsed.mode === "resetPassword") {
-    return (<Redirect
-      to={{
-        pathname: "/reset",
-        state: { resetParams: parsed }
-      }}
-    />);
+  if (parsed.mode && parsed.mode === "resetPassword") {
+    //props.location.history.replace('/reset');
+    return (<ResetPassword fbData={parsed} jss={props.jss} />);
   }
 
   return (
-    <div>
-      {JSON.stringify(parsed)}
-    </div>
-  )
+    <Redirect to="/" />
+  );
 }
 
 Auth.propTypes = {
-  location: PropTypes.object.isRequired
+  jss: PropTypes.object.isRequired
 }
 
 export default Auth;

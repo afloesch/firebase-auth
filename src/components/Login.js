@@ -125,8 +125,8 @@ class Login extends React.Component {
         </section>
         <section id="links">
           <div>
-            <LoginLink href="/reset" target="_self" style={{float:'left'}}>Forgot your password?</LoginLink>
-            <LoginLink href="/create" target="_self" style={{float:'right'}}>Don't have an account?</LoginLink>
+            <LoginLink href="/reset" style={{float:'left'}}>Forgot your password?</LoginLink>
+            <LoginLink href="/create" style={{float:'right'}}>Don't have an account?</LoginLink>
           </div>
         </section>
       </div>
@@ -146,7 +146,9 @@ class Login extends React.Component {
 
   render() {
 
-    if (this.state.loader) return this.loader();
+    let user = Firebase.getUser()
+
+    if (this.state.loader && !user) return this.loader();
 
     if (!this.state.user) {
       return this.login();
