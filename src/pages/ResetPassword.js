@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Paper from '@material-ui/core/Paper';
+import injectSheet from 'react-jss';
 
 import Reset from '../components/ResetPassword';
 import PasswordConfirm from '../components/PasswordConfirmation';
+import Link from '../components/Link';
 
 function ResetPassword(props) {
 
@@ -20,10 +21,17 @@ function ResetPassword(props) {
     content = (<PasswordConfirm classes={props.jss.rules.raw} code={params.oobCode} />)
   }
 
+  const StyledLink = injectSheet(props.jss.rules.raw)(Link)
+
   return (
-    <Paper className={props.jss.classes.paper}>
-      {content}
-    </Paper>
+    <div>
+      <section id="reset">
+        {content}
+      </section>
+      <section id="links">
+        <StyledLink href="/">Back</StyledLink>
+      </section>
+    </div>
   );
 }
 
