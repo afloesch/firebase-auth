@@ -67,9 +67,10 @@ class ResetPassword extends React.Component {
     }
 
     if (this.state.success === true) {
+      let msg = `Please check your ${this.state.value} inbox for a link to reset your password.`
       return (
         <div className={this.props.className}>
-          <span>Check your email.</span>
+          <span>{msg}</span>
         </div>
       );
     }
@@ -82,10 +83,10 @@ class ResetPassword extends React.Component {
 
     return (
       <div className={this.props.className}>
-        <span>Enter your email address and we'll send you an email to reset your password.</span>
+        <span>Enter your email address to receive a link to reset your password.</span>
         <section id="error">{errMsg}</section>
         <section id="passwordReset">
-          <form onSubmit={this.handleSubmit}>
+          <form id="form" onSubmit={this.handleSubmit}>
             <div>
               <Email type="email" id="email" label="Email" variant="outlined" required={true} onChange={this.handleChange}/>
             </div>
