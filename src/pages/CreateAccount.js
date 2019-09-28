@@ -1,11 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function CreateAccount() {
+import Create from '../components/CreateAccount';
+
+function CreateAccount(props) {
   return (
-    <div>
-      <h2>Create Account page</h2>
-    </div>
-  )
+    <Create classes={props.jss.rules.raw} />
+  );
+}
+
+CreateAccount.propTypes = {
+  jss: PropTypes.object.isRequired
 }
 
 export default CreateAccount

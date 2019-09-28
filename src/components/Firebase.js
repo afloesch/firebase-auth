@@ -42,6 +42,13 @@ class Firebase {
     })
   }
 
+  createAccount = function(email, password) {
+    return this.auth.createUserWithEmailAndPassword(email, password)
+      .catch(function(error) {
+        throw error
+      });
+  }
+
   sendPasswordResetEmail = function(email) {
     return this.auth.sendPasswordResetEmail(email)
       .catch(function(error) {
