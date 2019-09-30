@@ -9,28 +9,36 @@ const theme = {
 
 const style = {
   '@global': {
-    "html, body, #root": {
-      height: '100%',
+    "html, body": {
       position: 'relative',
-      background: theme.color.grey,
-      color: theme.color.black
+      margin: 0,
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+      background: theme.black
+    },
+    'html, body, #root': {
+      height: '100%'
     },
     '#form': {
       overflow: 'hidden'
-    },
-    body: {
-      margin: 0,
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif'
     },
     code: {
       fontFamily: 'source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace'
     }
   },
   app: {
-    position: "absolute",
-    width: "100%",
-    top: "25%",
-    bottom: "75%",
+    height: '100%'
+  },
+  table: {
+    display: 'table',
+    height: '100%',
+    width: '100%'
+  },
+  background: {
+    position: 'absolute',
+    height: '100%',
+    width: '100%',
+    'object-fit': 'cover',
+    'z-index': '-99999'
   },
   logo: {
     height: '25px',
@@ -39,8 +47,12 @@ const style = {
   },
   container: {
     margin: '0 auto',
-    display: 'block',
-    width: '400px'
+    display: 'table-row',
+    height: '100%'
+  },
+  content: {
+    display: 'table-cell',
+    'vertical-align': 'middle'
   },
   button: {
     margin: "1em 0",
@@ -81,7 +93,9 @@ const style = {
     fontSize: '13px'
   },
   paper: {
-    padding: '3em 2em'
+    padding: '3em 2em',
+    width: '400px',
+    margin: '0 auto'
   }
 }
 
