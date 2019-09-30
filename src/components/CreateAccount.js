@@ -22,7 +22,8 @@ class CreateAccount extends React.Component {
         confirm: "",
         email: "",
         error: null,
-        loader: false
+        loader: false,
+        created: false
       };
 
       this.controls = {
@@ -44,6 +45,7 @@ class CreateAccount extends React.Component {
 
     handleSubmit(evt) {
       evt.preventDefault();
+      this.setState({loader: true});
 
       if (this.state.password !== this.state.confirm) {
         let e = {message: "Password values do not match."};
@@ -68,11 +70,27 @@ class CreateAccount extends React.Component {
       let self = this;
       Firebase.createAccount(this.state.email, this.state.password)
         .then(function(result) {
-          console.log(result);
+          self.setState({created: true, loader: true});
+          console.log(result.user);
+
+          let user = Firebase.getUser();
+          return user.sendEmailVerification();
+        })
+        .then(function() {
+          self.setState({loader: false});
         })
         .catch(function(err) {
-          self.setState({error: err});
+          self.setState({error: err, loader: false});
         });
+    }
+
+    complete() {
+      return(
+        <div className={this.props.className}>
+          <div>Account created. Please verify your email address using the link provided in your inbox.</div>
+          <div>Make sure to check your spam folder if you can't find the email.</div>
+        </div>
+      );
     }
 
     loader() {
@@ -82,19 +100,14 @@ class CreateAccount extends React.Component {
         <div className={this.props.className}>
           <Spinner />
         </div>
-      )
+      );
     }
 
-    render() {
+    form() {
       const Input = this.controls.field;
       const Submit = this.controls.button;
 
-      if (this.state.loader) {
-        return this.loader();
-      }
-
       let Err = null;
-
       if (this.state.error) {
         Err = (
           <ErrorMsg>{this.state.error.message}</ErrorMsg>
@@ -105,7 +118,7 @@ class CreateAccount extends React.Component {
         <div className={this.props.className}>
           <section id="error">{Err}</section>
           <section id="create">
-            <form id="form" onSubmit={this.handleChange}>
+            <form id="form" onSubmit={this.handleSubmit}>
               <div>
                 <Input required={true} variant="outlined" type="email" id="email" label="Email" value={this.state.email} onChange={this.handleChange} />
               </div>
@@ -120,6 +133,19 @@ class CreateAccount extends React.Component {
           </section>
         </div>
       );
+    }
+
+    render() {
+
+      if (this.state.loader) {
+        return this.loader();
+      }
+
+      if (!this.state.created) {
+        return this.form();
+      } else {
+        return this.complete();
+      }
     }
 }
 

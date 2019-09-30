@@ -49,6 +49,13 @@ class Firebase {
       });
   }
 
+  verifyEmail = function(code) {
+    return this.auth.applyActionCode(code)
+      .catch(function(error) {
+        throw error
+      });
+  }
+
   sendPasswordResetEmail = function(email) {
     return this.auth.sendPasswordResetEmail(email)
       .catch(function(error) {

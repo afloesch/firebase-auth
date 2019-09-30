@@ -74,7 +74,8 @@ const style = {
   },
   loginform: {
     display: 'inline-block',
-    width: '100%'
+    width: '100%',
+    'text-align': 'center'
   },
   link: {
     fontSize: '13px'
