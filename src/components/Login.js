@@ -113,7 +113,7 @@ class Login extends React.Component {
               <LoginField
                 required={true}
                 id="username" 
-                label="Username" 
+                label="Email" 
                 type="email" 
                 onChange={this.handleFieldChange} 
                 value={this.state.username} 
