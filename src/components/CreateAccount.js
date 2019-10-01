@@ -49,13 +49,13 @@ class CreateAccount extends React.Component {
 
       if (this.state.password !== this.state.confirm) {
         let e = {message: "Password values do not match."};
-        this.setState({error: e});
+        this.setState({error: e, loader: false});
         return;
       }
   
       if (this.state.password.length < 8) {
         let e = {message: "Passwords need to be at least 8 characters long."};
-        this.setState({error: e});
+        this.setState({error: e, loader: false});
         return;
       }
   
@@ -63,7 +63,7 @@ class CreateAccount extends React.Component {
   
       if (sc) {
         let e = {message: "Passwords must contain at least one number or special character."};
-        this.setState({error: e});
+        this.setState({error: e, loader: false});
         return;
       }      
 
