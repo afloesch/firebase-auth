@@ -12,6 +12,7 @@ class Field extends React.Component {
   render() {
 
     return(
+      <div>
       <TextField
         required={this.props.required}
         id={this.props.id}
@@ -22,8 +23,9 @@ class Field extends React.Component {
         }}
         onChange={(evt) => {this.props.onChange(evt)}}
         value={this.props.value}
-        variant={this.props.variant}
+        variant='outlined'
       />
+      </div>
     )
   }
 }
@@ -35,7 +37,6 @@ Field.propTypes = {
   classes: PropTypes.object.isRequired,
   onChange: PropTypes.func,
   value: PropTypes.string,
-  variant: PropTypes.string.isRequired,
   required: PropTypes.bool.isRequired
 };
 

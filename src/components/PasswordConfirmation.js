@@ -141,10 +141,10 @@ class PasswordConfirmation extends React.Component {
         <section id="newPasswordForm">
           <form id="form" onSubmit={submitHandler}>
             <div>
-              <Password required={true} variant="outlined" type="password" id="password" label="New Password" value={this.state.password} onChange={this.handleChange} />
+              <Password required={true} type="password" id="password" label="New Password" value={this.state.password} onChange={this.handleChange} />
             </div>
             <div>
-              <Password required={true} variant="outlined" type="password" id="confirm" label="Confirm Password" value={this.state.confirm} onChange={this.handleChange} />
+              <Password required={true} type="password" id="confirm" label="Confirm Password" value={this.state.confirm} onChange={this.handleChange} />
             </div>
             <Submit type="submit">Update</Submit>
           </form>

@@ -120,13 +120,13 @@ class CreateAccount extends React.Component {
           <section id="create">
             <form id="form" onSubmit={this.handleSubmit}>
               <div>
-                <Input required={true} variant="outlined" type="email" id="email" label="Email" value={this.state.email} onChange={this.handleChange} />
+                <Input required={true} type="email" id="email" label="Email" value={this.state.email} onChange={this.handleChange} />
               </div>
               <div>
-                <Input required={true} variant="outlined" type="password" id="password" label="Password" value={this.state.password} onChange={this.handleChange} />
+                <Input required={true} type="password" id="password" label="Password" value={this.state.password} onChange={this.handleChange} />
               </div>
               <div>
-                <Input required={true} variant="outlined" type="password" id="confirm" label="Confirm Password" value={this.state.confirm} onChange={this.handleChange} />
+                <Input required={true} type="password" id="confirm" label="Confirm Password" value={this.state.confirm} onChange={this.handleChange} />
               </div>
               <Submit type="submit">Create Account</Submit>            
             </form>

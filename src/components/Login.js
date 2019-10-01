@@ -33,6 +33,7 @@ class Login extends React.Component {
 
     this.handleFieldChange = this.handleFieldChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInvalid = this.handleInvalid.bind(this);
     this.handleAuthStateChange = this.handleAuthStateChange.bind(this);
 
     Firebase.addListener(this.handleAuthStateChange);
@@ -48,6 +49,8 @@ class Login extends React.Component {
   }
 
   handleFieldChange(event) {
+    event.target.setCustomValidity('');
+
     let newState = {};
     newState[event.target.id] = event.target.value
     this.setState(newState);
@@ -56,6 +59,17 @@ class Login extends React.Component {
       sessionStorage.setItem("username", event.target.value);
     }
   };
+
+  handleInvalid(event) {
+
+    if (event.target.id === "password") {
+      event.target.setCustomValidity("Please enter your password.");
+    }
+
+    if (event.target.id === "username") {
+      event.target.setCustomValidity("Please enter your email address.")
+    }
+  }
 
   handleSubmit(event) {
     event.preventDefault();
@@ -105,7 +119,7 @@ class Login extends React.Component {
       <div className={this.props.className}>
         <section id="error">{errMsg}</section>
         <section id="form">
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} onInvalid={this.handleInvalid}>
             <div>
               <LoginField
                 required={true}
@@ -113,8 +127,7 @@ class Login extends React.Component {
                 label="Email" 
                 type="email" 
                 onChange={this.handleFieldChange} 
-                value={this.state.username} 
-                variant="outlined" />
+                value={this.state.username} />
             </div>
             <div>
               <LoginField
@@ -123,8 +136,7 @@ class Login extends React.Component {
                 label="Password"
                 type="password"
                 onChange={this.handleFieldChange}
-                value={this.state.password}
-                variant="outlined" />
+                value={this.state.password} />
             </div>
             <LoginButton type="submit">Log in</LoginButton>
           </form>

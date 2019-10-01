@@ -23,6 +23,9 @@ const style = {
     },
     code: {
       fontFamily: 'source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace'
+    },
+    "MuiFormHelperText-root": {
+      color: 'blue'
     }
   },
   app: {
@@ -68,7 +71,7 @@ const style = {
   field: {
     width: "100%",
     margin: "15px 0",
-    color: theme.color.black
+    color: theme.color.black,
     /*'& label.Mui-focused': {
       color: theme.color.green,
     },
@@ -83,6 +86,9 @@ const style = {
         borderColor: theme.color.green,
       },
     }*/
+    '&:invalid': {
+      color: 'blue'
+    }
   },
   loginform: {
     display: 'inline-block',

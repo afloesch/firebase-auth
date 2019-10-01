@@ -88,7 +88,7 @@ class ResetPassword extends React.Component {
         <section id="passwordReset">
           <form id="form" onSubmit={this.handleSubmit}>
             <div>
-              <Email type="email" id="email" label="Email" variant="outlined" required={true} onChange={this.handleChange}/>
+              <Email type="email" id="email" label="Email" required={true} onChange={this.handleChange}/>
             </div>
             <Submit type="submit">Send</Submit>
           </form>
