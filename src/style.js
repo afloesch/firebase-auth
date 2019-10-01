@@ -96,6 +96,7 @@ const style = {
     'text-align': 'center'
   },
   link: {
+    marginTop: '10px',
     fontSize: '13px'
   },
   paper: {

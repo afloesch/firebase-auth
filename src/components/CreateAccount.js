@@ -21,6 +21,8 @@ class CreateAccount extends React.Component {
         password: "",
         confirm: "",
         email: "",
+        first: "",
+        last: "",
         error: null,
         loader: false,
         created: false
@@ -70,14 +72,20 @@ class CreateAccount extends React.Component {
       let self = this;
       Firebase.createAccount(this.state.email, this.state.password)
         .then(function(result) {
-          self.setState({created: true, loader: true});
-          console.log(result.user);
-
-          let user = Firebase.getUser();
-          return user.sendEmailVerification();
+          return result.user.sendEmailVerification();
         })
         .then(function() {
-          self.setState({loader: false});
+          let user = Firebase.getUser();
+          let uid = user.uid;
+          let data = {
+            first: self.state.first,
+            last: self.state.last
+          }
+
+          return Firebase.createUserMetadata(uid, data)
+        })
+        .then(function(docRef) {
+          self.setState({created: true, loader: false});
         })
         .catch(function(err) {
           self.setState({error: err, loader: false});
@@ -119,6 +127,12 @@ class CreateAccount extends React.Component {
           <section id="error">{Err}</section>
           <section id="create">
             <form id="form" onSubmit={this.handleSubmit}>
+              <div>
+                <Input required={false} type="text" id="first" label="First Name" value={this.state.first} onChange={this.handleChange} />
+              </div>
+              <div>
+                <Input required={false} type="text" id="last" label="Last Name" value={this.state.last} onChange={this.handleChange} />
+              </div>
               <div>
                 <Input required={true} type="email" id="email" label="Email" value={this.state.email} onChange={this.handleChange} />
               </div>

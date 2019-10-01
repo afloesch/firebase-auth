@@ -40,7 +40,7 @@ class VerifyEmail extends React.Component {
   complete() {
     return(
       <div className={this.props.className}>
-        <div>Success! Your email has been verified.</div>
+        <div>Thank you! Your email address has been verified.</div>
       </div>
     );
   }

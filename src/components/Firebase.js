@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
-import 'firebase/auth'
+import 'firebase/auth';
+import 'firebase/firestore';
 import config from '../config';
 
 class Firebase {
@@ -9,6 +10,7 @@ class Firebase {
 
     this.app = firebase.app();
     this.auth = firebase.auth(this.app);
+    this.db = firebase.firestore();
     
     this.listeners = [];
 
@@ -47,6 +49,35 @@ class Firebase {
       .catch(function(error) {
         throw error
       });
+  }
+
+  createUserMetadata = function(uid, data) {
+    data.uid = uid;
+    return this.db.collection("users").add(data)
+      .catch(function(error) {
+        throw error;
+      });
+  }
+
+  getUserMetadata = function(uid) {
+    return this.db.collection("users").where("id", "==", uid)
+      .catch(function(error) {
+        throw error;
+      });
+  }
+
+  updateUserMetadata = function(uid, data) {
+    return this.db.collection("users").doc(uid).update(data)
+      .catch(function(error) {
+        throw error;
+      });
+  }
+
+  deleteUserMetadata = function(uid) {
+    return this.db.collection("users").doc(uid).delete()
+      .catch(function(error) {
+        throw error;
+      })
   }
 
   verifyEmail = function(code) {
