@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
-
 import {Redirect} from 'react-router-dom';
 
 function Auth(props) {
@@ -10,7 +9,7 @@ function Auth(props) {
   let state = {
     params: parsed
   };
-  
+
   if (parsed.mode && parsed.mode === "resetPassword") {
     return(<Redirect to={{pathname: "/reset", state: state}} />);
   }

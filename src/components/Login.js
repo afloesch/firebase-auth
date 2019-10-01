@@ -9,10 +9,6 @@ import Field from './Field';
 import ErrorMsg from './ErrorMsg';
 import Loader from './Loader';
 
-/*const style = {
-  loginform: {}
-};*/
-
 class Login extends React.Component {
 
   constructor(props) {
@@ -77,6 +73,7 @@ class Login extends React.Component {
 
   handleAuthStateChange(event) {
     this.setState({user: event, loader: false, error: null, password: ""});
+    console.log(this.state.user);
   }
 
   loader() {
@@ -144,11 +141,19 @@ class Login extends React.Component {
 
   success() {
     const LoginButton = this.controls.button;
+    const LoginLink = this.controls.link;
 
     return(
       <div className={this.props.className}>
-        <h1>Success!</h1>
-        <LoginButton onClick={function(){window.logout();}}>Logout</LoginButton>
+        <section id="content">
+          <h1>You are logged on.</h1>
+          <LoginButton onClick={function(){window.logout();}}>Logout</LoginButton>
+        </section>
+        <section id="links">
+          <div>
+            <LoginLink href="/reset" style={{float:'left'}}>Change your password</LoginLink>
+          </div>
+        </section>
       </div>
     );
   }

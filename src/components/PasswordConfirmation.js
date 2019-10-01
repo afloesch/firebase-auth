@@ -14,7 +14,8 @@ class PasswordConfirmation extends React.Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
     className: PropTypes.string,
-    code: PropTypes.string.isRequired
+    code: PropTypes.string,
+    user: PropTypes.object
   }
 
   constructor(props) {
@@ -35,7 +36,8 @@ class PasswordConfirmation extends React.Component {
     }
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCode = this.handleCode.bind(this);
+    this.handleUser = this.handleUser.bind(this);
   }
 
   handleChange(evt) {
@@ -44,32 +46,54 @@ class PasswordConfirmation extends React.Component {
     this.setState(state);
   }
 
-  handleSubmit(evt) {
-    evt.preventDefault();
-    this.setState({loader: true});
-
+  validatePassword() {
     if (this.state.password !== this.state.confirm) {
       let e = {message: "Password values do not match."};
-      this.setState({error: e});
-      return;
+      return e;
     }
 
     if (this.state.password.length < 8) {
       let e = {message: "Passwords need to be at least 8 characters long."};
-      this.setState({error: e});
-      return;
+      return e;
     }
 
     let sc = !/[~`!#$%^&*+=\-[\]\\';,/{}|\\":<>?\d]/g.test(this.state.password);
 
     if (sc) {
       let e = {message: "Passwords must contain at least one number or special character."};
-      this.setState({error: e});
-      return;
+      return e;
     }
+
+    return null;
+  }
+
+  handleCode(evt) {
+    evt.preventDefault();
+    this.setState({loader: true});
+
+    let err = this.validatePassword();
+    if (err) return this.setState({error: err, loader: false});
 
     let self = this;
     Firebase.confirmPasswordReset(this.props.code, this.state.password)
+      .then(function() {
+        self.setState({loader: false});
+        return (<Redirect to="/" />);
+      })
+      .catch(function(error) {
+        self.setState({error: error, loader: false});
+      });
+  }
+
+  handleUser(evt) {
+    evt.preventDefault();
+    this.setState({loader: true});
+
+    let err = this.validatePassword();
+    if (err) return this.setState({error: err, loader: false});
+
+    let self = this;
+    this.props.user.updatePassword(this.state.password)
       .then(function() {
         self.setState({loader: false});
         return (<Redirect to="/" />);
@@ -105,12 +129,17 @@ class PasswordConfirmation extends React.Component {
       );
     }
 
+    let submitHandler = this.handleSubmit;
+    if (this.props.user) {
+      submitHandler = this.handleUser;
+    }
+
     return (
       <div className={this.props.className}>
         <span>Enter your new password. Passwords must be a minimum of 8 characters long, with at least one number or special character.</span>
         <section id="error">{Err}</section>
         <section id="newPasswordForm">
-          <form id="form" onSubmit={this.handleSubmit}>
+          <form id="form" onSubmit={submitHandler}>
             <div>
               <Password required={true} variant="outlined" type="password" id="password" label="New Password" value={this.state.password} onChange={this.handleChange} />
             </div>

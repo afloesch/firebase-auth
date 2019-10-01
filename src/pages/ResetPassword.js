@@ -5,16 +5,23 @@ import injectSheet from 'react-jss';
 import Reset from '../components/ResetPassword';
 import PasswordConfirm from '../components/PasswordConfirmation';
 import Link from '../components/Link';
+import Firebase from '../components/Firebase';
 
 function ResetPassword(props) {
 
-  let content = (<Reset className={props.jss.classes.reset} classes={props.jss.rules.raw} />);
   let params = props.params
 
   if (!params) {
     try {
       params = props.location.location.state.params;
     } catch(e) {}
+  }
+
+  let content = (<Reset className={props.jss.classes.reset} classes={props.jss.rules.raw} />);
+  let user = Firebase.getUser();
+
+  if (user) {
+    content = (<PasswordConfirm classes={props.jss.rules.raw} user={user} />);
   }
 
   if (params) {
