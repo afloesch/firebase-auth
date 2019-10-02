@@ -11,13 +11,12 @@ function App(props) {
 
   return (
     <div className={props.jss.classes.app}>
-      <img src="/img/bw-background1.jpeg" alt="background-img" className={props.jss.classes.background} />
-      <div className={props.jss.classes.table}>
-        <div className={props.jss.classes.container}>
-          <div className={props.jss.classes.content}>
+      <div className="table">
+        <div className="container">
+          <div className="content">
             <Paper className={props.jss.classes.paper}>
               <div>
-                <img className={props.jss.classes.logo} src="/img/bw-logo-black.png" alt="Logo" />
+                <img className="logo" src="/img/bw-logo-black.png" alt="Logo" />
               </div>
               <Switch>
                 <Route exact path="/" render={() => <Login jss={props.jss} />} />

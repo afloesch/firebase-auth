@@ -87,7 +87,6 @@ class Login extends React.Component {
 
   handleAuthStateChange(event) {
     this.setState({user: event, loader: false, error: null, password: ""});
-    console.log(this.state.user);
   }
 
   loader() {
@@ -158,8 +157,10 @@ class Login extends React.Component {
     return(
       <div className={this.props.className}>
         <section id="content">
-          <h1>You are logged on.</h1>
-          <LoginButton onClick={function(){window.logout();}}>Logout</LoginButton>
+          <div>
+            <h1>You are logged on.</h1>
+            <LoginButton onClick={function(){window.logout();}}>Logout</LoginButton>
+          </div>
         </section>
         <section id="links">
           <div>
