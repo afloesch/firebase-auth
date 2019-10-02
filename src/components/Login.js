@@ -40,8 +40,10 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    let user = Firebase.getUser();
-    this.setState({user: user, loader: false});
+    let self = this;
+    Firebase.auth.onAuthStateChanged(function(user) {
+      self.setState({user: user, loader: false});
+    });
   }
 
   componentWillUnmount() {
