@@ -78,8 +78,10 @@ class CreateAccount extends React.Component {
           let user = Firebase.getUser();
           let uid = user.uid;
           let data = {
-            first: self.state.first,
-            last: self.state.last
+            name: {
+              first: self.state.first,
+              last: self.state.last
+            }
           }
 
           return Firebase.createUserMetadata(uid, data)

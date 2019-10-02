@@ -22,6 +22,9 @@ const style = {
     },
     code: {
       fontFamily: 'source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace'
+    },
+    '.switch-wrapper': {
+      position: 'relative'
     }
   },
   app: {
@@ -79,6 +82,20 @@ const style = {
     padding: '3em 2em',
     width: '400px',
     margin: '0 auto'
+  },
+  spinner: {
+    width: '8em',
+    height: '8em',
+    margin: '20px auto',
+    fontSize: '6px',
+    borderTop: '.8em solid rgba(0,0,0, 0.2)',
+    borderRight: '.8em solid rgba(0,0,0, 0.2)',
+    borderBottom: '.8em solid rgba(0,0,0, 0.2)',
+    borderLeft: '.8em solid #000000',
+    '&:after': {
+      width: '8em',
+      height: '8em'
+    }
   }
 }
 

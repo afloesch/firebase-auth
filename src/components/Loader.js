@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
 
 const style = {
-  loader: {
+  spinner: {
     width: '10em',
     height: '10em',
     margin: '20px auto',
@@ -36,7 +36,7 @@ const style = {
 class Loader extends React.Component {
   render() {
     return(
-      <div className={this.props.classes.loader}>Loading...</div>
+      <div className={this.props.classes.spinner}>Loading...</div>
     )
   }
 }
