@@ -71,8 +71,8 @@ class CreateAccount extends React.Component {
 
       let self = this;
       Firebase.createAccount(this.state.email, this.state.password)
-        .then(function(result) {
-          return result.user.sendEmailVerification();
+        .then(function() {
+          return Firebase.sendVerifyEmail();
         })
         .then(function() {
           let user = Firebase.getUser();

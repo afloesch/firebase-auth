@@ -80,6 +80,14 @@ class Firebase {
       })
   }
 
+  sendVerifyEmail = function() {
+    let user = this.getUser();
+    return user.sendEmailVerification()
+      .catch(function(error) {
+        throw error;
+      });
+  }
+
   verifyEmail = function(code) {
     return this.auth.applyActionCode(code)
       .catch(function(error) {
