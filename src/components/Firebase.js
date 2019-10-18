@@ -11,8 +11,13 @@ class Firebase {
     this.app = firebase.app();
     this.auth = firebase.auth(this.app);
     this.db = firebase.firestore();
-    
     this.listeners = [];
+    this.federated = {
+      google: new firebase.auth.GoogleAuthProvider()
+    }
+
+    this.federated.google.addScope('profile');
+    this.federated.google.addScope('email');
 
     let self = this;
     this.auth.onAuthStateChanged(function(user) {
@@ -22,6 +27,7 @@ class Firebase {
     });
 
     this.logout = this.logout.bind(this);
+    this.loginWithGoogle = this.loginWithGoogle.bind(this);
   }
 
   addListener = function(func) {
@@ -53,17 +59,27 @@ class Firebase {
 
   createUserMetadata = function(uid, data) {
     data.uid = uid;
-    return this.db.collection("users").add(data)
+    return this.db.collection("users").doc(uid).set(data)
       .catch(function(error) {
         throw error;
       });
   }
 
   getUserMetadata = function(uid) {
-    return this.db.collection("users").where("id", "==", uid)
-      .catch(function(error) {
-        throw error;
-      });
+    let ref =  this.db.collection("users").doc(uid);
+
+    return new Promise(function(done, error) {
+
+      if (!ref) error('Document ref not found!');
+
+      ref.get().then(function(doc) {
+        if (doc.exists) {
+          done(doc.data());
+        } else {
+          error("Document doesn't exist!");
+        }
+      })
+    });
   }
 
   updateUserMetadata = function(uid, data) {
@@ -115,6 +131,11 @@ class Firebase {
         throw error;
       });
   };
+
+  loginWithGoogle = function() {
+    let provider = this.federated.google;
+    return firebase.auth().signInWithRedirect(provider);
+  }
 }
 
 const singleton = new Firebase();

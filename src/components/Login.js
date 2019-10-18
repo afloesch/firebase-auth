@@ -35,6 +35,7 @@ class Login extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInvalid = this.handleInvalid.bind(this);
     this.handleAuthStateChange = this.handleAuthStateChange.bind(this);
+    this.handleGoogleLoginButton = this.handleGoogleLoginButton.bind(this);
 
     Firebase.addListener(this.handleAuthStateChange);
   }
@@ -91,6 +92,11 @@ class Login extends React.Component {
     this.setState({user: event, loader: false, error: null, password: ""});
   }
 
+  handleGoogleLoginButton() {
+    this.setState({loader: true});
+    return Firebase.loginWithGoogle();
+  }
+
   loader() {
     const Loader = this.controls.loader;
     return (
@@ -141,6 +147,9 @@ class Login extends React.Component {
             </div>
             <LoginButton type="submit">Log in</LoginButton>
           </form>
+        </section>
+        <section id="federated">
+          <LoginButton type="button" onClick={this.handleGoogleLoginButton}>Sign in with Google</LoginButton>
         </section>
         <section id="links">
           <div>
